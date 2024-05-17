@@ -8,28 +8,35 @@ password = os.getenv("PRIVATEKEYPOSTGRES")
 host = "database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com"
 port = "5432"
 
-# Conecta-se ao banco de dados
-conn = psycopg2.connect(
-    dbname=dbname,
-    user=user,
-    password=password,
-    host=host,
-    port=port
-)
+try:
+    # Conecta-se ao banco de dados
+    conn = psycopg2.connect(
+        dbname=dbname,
+        user=user,
+        password=password,
+        host=host,
+        port=port
+    )
 
-# Cria um cursor para executar comandos SQL
-cursor = conn.cursor()
+    # Cria um cursor para executar comandos SQL
+    cursor = conn.cursor()
 
-# Executa a consulta
-cursor.execute('SELECT * FROM public.contacts;')
+    # Executa a consulta
+    cursor.execute('SELECT * FROM public.contacts;')
 
-# Recupera os resultados
-results = cursor.fetchall()
+    # Recupera os resultados
+    results = cursor.fetchall()
 
-# Fecha o cursor e a conexão
-cursor.close()
-conn.close()
+    # Itera sobre os resultados e imprime-os
+    for x in results:
+        print(x)
 
-# Itera sobre os resultados e imprime-os
-for x in results:
-    print(x)
+except psycopg2.Error as e:
+    print("Erro ao conectar ao banco de dados:", e)
+
+finally:
+    # Fecha o cursor e a conexão
+    if 'cursor' in locals():
+        cursor.close()
+    if 'conn' in locals():
+        conn.close()
