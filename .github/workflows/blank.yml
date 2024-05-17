@@ -35,5 +35,5 @@ jobs:
         run: |
           sudo apt-get -y install python3
           sudo pip install psycopg2-binary
-          python database.py ${{ secrets.USER }} ${{ secrets.PRIVATEKEYPOSTGRES }}
+          python database.py ${{ secrets.USER }} ${{ secrets.PRIVATEKEYPOSTGRES }} 
           
