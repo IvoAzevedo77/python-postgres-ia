@@ -1,5 +1,6 @@
 import psycopg2
 import os
+import sys
 
 # Obtém as informações de conexão a partir das variáveis de ambiente
 dbname = "db-ia"
@@ -7,6 +8,14 @@ user = os.getenv("USER")
 password = os.getenv("PRIVATEKEYPOSTGRES")
 host = "database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com"
 port = "5432"
+
+# Verifica se as variáveis de ambiente estão definidas corretamente
+if not user:
+    print("A variável de ambiente USER não está definida.")
+    sys.exit(1)
+if not password:
+    print("A variável de ambiente PRIVATEKEYPOSTGRES não está definida.")
+    sys.exit(1)
 
 try:
     # Conecta-se ao banco de dados
