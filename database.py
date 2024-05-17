@@ -1,6 +1,12 @@
 import psycopg2
 import os
+from dotenv import load_dotenv
 import sys
+
+# Carrega as variáveis de ambiente do arquivo .env
+if not load_dotenv():
+    print("Arquivo .env não encontrado ou não pode ser lido.")
+    sys.exit(1)
 
 # Obtém as informações de conexão a partir das variáveis de ambiente
 dbname = "db-ia"
@@ -16,6 +22,10 @@ if not user:
 if not password:
     print("A variável de ambiente PRIVATEKEYPOSTGRES não está definida.")
     sys.exit(1)
+
+print("Variáveis de ambiente carregadas:")
+print(f"USER: {user}")
+print(f"PRIVATEKEYPOSTGRES: {'*' * len(password)}")  # Não imprime a senha diretamente por razões de segurança
 
 try:
     # Conecta-se ao banco de dados
