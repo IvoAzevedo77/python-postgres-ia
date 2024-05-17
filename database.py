@@ -1,6 +1,11 @@
 import psycopg2
 import os
-print(os.environ)
+import sys
+#print(os.environ)
+print(sys.argv[0])
+print(sys.argv[1])
+print(sys.argv[2])
+
 
 conn = psycopg2.connect(
     dbname="db-ia",
