@@ -1,7 +1,5 @@
 import psycopg2
 import os
-print(os.environ)
-
 
 try:
     # Conecta ao banco de dados
@@ -9,8 +7,8 @@ try:
         host='3.121.182.90',
         port=5432,
         database='db-ia',
-        user='postgres',
-        password='Abcd1234!'
+        user = os.getenv("USER"),
+        password = os.getenv("PRIVATEKEYPOSTGRES")
     )
 
     # Cria um cursor para executar comandos SQL
